@@ -1,0 +1,5 @@
+<% if client_signed_in? || employee_signed_in? %>
+<% else %>
+  <p><%= link_to('Enter as client', new_client_session_path) %></p>
+  <p><%= link_to('Enter as employee', new_employee_session_path) %></p>
+<% end %>
