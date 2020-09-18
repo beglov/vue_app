@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :employees
   devise_for :clients
+
+  resources :employees, :clients do
+    get :dashboard, on: :collection
+  end
 end
