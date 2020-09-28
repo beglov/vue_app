@@ -5,18 +5,19 @@
     template(v-else-if="error")
       p Error :-(
     template(v-else)
-      navbar(:current_user="current_user")
+      navbar(:current_user="current_user", :logout_path="logout_path")
       dashboard(:clients="clients" @addClient="addClient")
 </template>
 
 <script>
-import Navbar from './components/navbar'
+import Navbar from '../components/navbar'
 import Dashboard from './components/dashboard'
 
 export default {
   data() {
     return {
       current_user: {},
+      logout_path: "/employees/sign_out",
       clients: [],
       loading: true,
       error: false,
@@ -36,7 +37,14 @@ export default {
       .finally(() => this.loading = false)
     },
     addClient(client) {
-      this.clients.push(client)
+      this.$api.axios.post('/clients.json', {client})
+        .then((response) => {
+          console.log(response);
+          this.clients.push(client)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   components: {
@@ -47,12 +55,4 @@ export default {
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-
-.red {
-  color: orange;
-}
 </style>

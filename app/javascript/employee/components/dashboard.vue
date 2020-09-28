@@ -3,9 +3,9 @@
     p Dashboard
     div.new-client
       form(v-on:submit.prevent="onSubmit")
-        input(v-model="fullname" placeholder="fullname")
-        input(v-model="phone" placeholder="phone")
-        input(v-model="email" placeholder="email")
+        input(v-model="fullname" placeholder="fullname" required pattern="\\w{5,}")
+        input(type="phone" v-model="phone" placeholder="phone" required pattern="\\d+")
+        input(type="email" v-model="email" placeholder="email" required)
         input(type="submit")
     div(v-for="client in clients" :key="client.id")
       client(:client="client")
