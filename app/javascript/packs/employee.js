@@ -5,16 +5,17 @@
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
+require("@rails/ujs").start()
+
 import Vue from 'vue'
-import App from '../app.vue'
+import App from '../employee/app.vue'
+import '../api'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
+  new Vue({
+    el: '#app',
     render: h => h(App)
   }).$mount()
-  document.body.appendChild(app.$el)
-
-  console.log(app)
 })
 
 
